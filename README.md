@@ -1,4 +1,4 @@
-# unit-4-2-assignment
+# unit-4-4-assignment
 
 ## To compile code
 All code must be compiled before you can run it.  To compile means that you are converting your C++ code into a language that the computer can understand (e.g., binary).  To compile C++ code, run the following command in a terminal:
@@ -20,117 +20,89 @@ g++ classwork.cpp -o output
 ./output
 ```
 
-# Calculator Assignment
-* Make a calculator program using if-statements (or nested if-statements).
-* Feel free to add more options
-* For division, make sure that you never divide by 0.  If the user enters 0 to divide by, display an error message.
-* For the square root, make sure that you do not take the square root of a negative number.  Display an error message when the user tries to take the square root of a negative number.
-* Display an error message when the user enters an invalid input
+## Problem 1
+Prompt the user for a number from 1 to 100. Using a while loop, if they entered an invalid number, tell them the number entered is invalid and then prompt them again for a number from 1 to 100. If they enter a valid number - thank them for their input.
+
+* Prompt the user for a number from 1 to 100
+* While that number is less than 1 or that number is more than 100
+* Output that they entered an invalid number
+* Prompt them again for a number from 1 to 100
+* Output to the user, thanking them for their input
+
+## Problem 2
+Prompt the user to guess your favorite color. Using a while loop, if the user didn't guess your favorite color [pick one for this activity] then tell them they are incorrect, then ask them again. Whenever they guess the color correctly, output that they are correct and how many guesses it took them.
+
+* Create a variable and assign it the value of 1
+* Prompt the user to guess your favorite color
+* While their guess is not equal to your favorite color
+* Tell them they are incorrect
+* Prompt them to guess again
+* Add one to the variable above
+* Output to the user, they were correct and how many attempts it took using the variable
+ 
+
+## Problem 3
+Ask the user how many numbers for which they want to calculate the sum. Using a for loop, prompt the user to enter that many numbers, one-by-one, keeping track of the sum. At the end, after the user entered all numbers, output the sum.
+
+* Create a variable and assign it the value of 0
+* Prompt the user for how many numbers they have
+* With a for loop, set it to repeat enough times to get all their values
+* Prompt the user for a number
+* Add that number to the variable that started as 0
+* Output to the user, the sum of all values
 
 # Sample Solution
 ```c++
-#include <cmath>     // std::abs, std::sqrt, std::pow
-#include <cstdlib>   // std::srand, std::rand
-#include <ctime>     // std::time
-#include <iostream>  // std::cin, std::cout, std::getline
-#include <string>    // std::string
+#include <iostream>
+#include <string>
 
 int main()
 {
-  std::srand(std::time(0));  // seeding our random number generator
+    // Problem 1: Prompt the user for a number from 1 to 100
+    int number;
+    std::cout << "Please enter a number from 1 to 100: ";
+    std::cin >> number;
 
-  int user_input = 0;
-  int num1;
-  int num2;
-  double numerator;
-  double denominator;
-  while (user_input != 99)
-  {
-    std::cout << "Welcome to C++ Calculator! Choose an option below!\n"
-              << "0. Roll a dice\n"        
-              << "1. Add\n"
-              << "2. Subtract\n"
-              << "3. Multiply\n"
-              << "4. Divide\n"
-              << "5. Square root\n"
-              << "99. Quit\n> ";
-
-    std::cin >> user_input;
-    
-    if (user_input == 0)
+    while (number < 1 || number > 100)
     {
-      int random_number = (std::rand() % 6) + 1;  // random numbers between 1 and 6
-      std::cout << "You rolled a " << random_number << std::endl;
+        std::cout << "Invalid number entered. Please enter a number from 1 to 100: ";
+        std::cin >> number;
     }
-    else
-    {
-      if (user_input == 1)
-      {
-        std::cout << "Enter two numbers\n";
-        std::cin >> num1 >> num2;
-        std::cout << "Their sum is " << (num1 + num2) << std::endl;
-      }
-      else
-      {
-        if (user_input == 2)
-        {
-          std::cout << "Enter two numbers\n";
-          std::cin >> num1 >> num2;
-          std::cout << "Their difference is " << (num1 - num2) << std::endl;
-        }
-        else
-        {
-          if (user_input == 3)
-          {
-            std::cout << "Enter two numbers\n";
-            std::cin >> num1 >> num2;
-            std::cout << "Their product is " << (num1 * num2) << std::endl;
-          }
-          else
-          {
-            if (user_input == 4)
-            {
-              std::cout << "Enter two numbers\n";
-              std::cin >> numerator >> denominator;
-              if (denominator == 0)
-              {
-                std::cout << "Error: Division by zero is not allowed.\n";
-              }
-              else
-              {
-                std::cout << "Their quotient is " << (numerator / denominator) << std::endl;
-              }
-            }
-            else
-            {
-              if (user_input == 5)
-              {
-                std::cout << "Enter a number\n";
-                std::cin >> num1;
-                if (num1 < 0)
-                {
-                  std::cout << "Error: Cannot compute square root of a negative number.\n";
-                }
-                else
-                {
-                  std::cout << "The square root of " << num1 << " is " << sqrt(num1) << std::endl;
-                }
-              }
-              else
-              {
-                if (user_input != 99)
-                {
-                  std::cout << "Invalid option, please choose again.\n";
-                }  // end if invalid input
-              }  // end if-else choice 5
-            }  // end if-else choice 4
-          }  // end if-else choice 3
-        }  // end if-else choice 2
-      }  // end if-else choice 1
-    }  // end if-else choice 0
-  }  // end while
+    std::cout << "Thank you for your input!" << std::endl;
 
-  std::cout << "Goodbye!\n";
-  return 0;
+    // Problem 2: Prompt the user to guess your favorite color
+    std::string favoriteColor = "blue"; // you can change this to any color
+    std::string guess;
+    int attempts = 1;
+
+    std::cout << "Guess my favorite color: ";
+    std::cin >> guess;
+
+    while (guess != favoriteColor)
+    {
+        std::cout << "Incorrect! Try again: ";
+        std::cin >> guess;
+        attempts = attempts + 1;
+    }
+
+    std::cout << "Correct! You guessed my favorite color in " << attempts << " attempt(s)." << std::endl;
+
+    // Problem 3: Ask the user how many numbers they want to sum
+    int numCount;
+    int sum = 0;
+    std::cout << "How many numbers would you like to sum? ";
+    std::cin >> numCount;
+
+    for (int i = 1; i <= numCount; i = i + 1)
+    {
+        int num;
+        std::cout << "Enter number " << i << ": ";
+        std::cin >> num;
+        sum = sum + num;
+    }
+
+    std::cout << "The sum of all the numbers is: " << sum << std::endl;
+
+    return 0;
 }
 ```
